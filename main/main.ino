@@ -6,15 +6,9 @@ unsigned long Time = 0;
 void setup() {
   Serial.begin(9600);
   Time = millis();
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
+  SegmentStartUp();
   
-  TEST_CycleTestsOnStartUp(); //Used for testing 7 segment array.
+  TEST_7SEGMENT_LED_TEST(); //Used for testing 7 segment array.
   // put your setup code here, to run once:
 }
 
@@ -24,7 +18,19 @@ void loop() {
   Display();
 }
 
-void Display(){
+void Display_A() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 1;
+    dOn[4] = 0;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Displaying the Letter A.");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void Display() {
   digitalWrite(2, dOn[0]);
   digitalWrite(3, dOn[1]);
   digitalWrite(4, dOn[2]);
@@ -34,11 +40,10 @@ void Display(){
   digitalWrite(8, dOn[6]);
 }
 
-void TemperatureOutput()
-{
+void TemperatureLogger() {
   if ((millis() - Time) > 1000) {
     Serial.print("Temperature: ");
-    Serial.println((analogRead(A0) / 0.488));
+    Serial.println((analogRead(A0) * 0.488));
     Time = millis();
   }
 }
@@ -75,27 +80,52 @@ void InputManagerLED() {
   }
 }
 
-void TEST_CycleTestsOnStartUp() {
+
+void SegmentStartUp() {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(8, OUTPUT);
+}
+
+void TEST_7SEGMENT_LED_TEST() {
     TEST_Display_ZERO_TEST();
+    Display();
     delay(1000);
     TEST_Display_ONE_TEST();
+    Display();
     delay(1000);
     TEST_Display_TWO_TEST();
+    Display();
     delay(1000);
     TEST_Display_THREE_TEST();
+    Display();
     delay(1000);
     TEST_Display_FOUR_TEST();
+    Display();
     delay(1000);
     TEST_Display_FIVE_TEST();
+    Display();
     delay(1000);
     TEST_Display_SIX_TEST();
+    Display();
     delay(1000);
     TEST_Display_SEVEN_TEST();
+    Display();
     delay(1000);
     TEST_Display_EIGHT_TEST();
+    Display();
     delay(1000);
     TEST_Display_NINE_TEST();
+    Display();
     delay(1000);
+    TEST_ALL_ON_TEST();
+    Display();
+    delay(1000);
+    TEST_ALL_OFF_TEST();
 }
 
 void TEST_OUTPUT_DISPLAY_ARRAY() {
@@ -233,4 +263,28 @@ void TEST_Display_NINE_TEST() {
     dOn[6] = 0;
     Serial.println("Testing the number NINE : 9");
     TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_ALL_ON_TEST() {
+  dOn[0] = 0;
+  dOn[1] = 0;
+  dOn[2] = 0;
+  dOn[3] = 0;
+  dOn[4] = 0;
+  dOn[5] = 0;
+  dOn[6] = 0;
+  Serial.println("Testing the array being turned ON.");
+  TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_ALL_OFF_TEST() {
+  dOn[0] = 1;
+  dOn[1] = 1;
+  dOn[2] = 1;
+  dOn[3] = 1;
+  dOn[4] = 1;
+  dOn[5] = 1;
+  dOn[6] = 1;
+  Serial.println("Testing the array being turned OFF.");
+  TEST_OUTPUT_DISPLAY_ARRAY();
 }
