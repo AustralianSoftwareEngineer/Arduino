@@ -14,7 +14,7 @@ void setup() {
   pinMode(7, OUTPUT);
   pinMode(8, OUTPUT);
   
-  //Used for testing 7 segment array.
+  TEST_CycleTestsOnStartUp(); //Used for testing 7 segment array.
   // put your setup code here, to run once:
 }
 
@@ -52,6 +52,7 @@ void InputManagerLED() {
       val = Serial.read()-48;
       if (val > -1) {
         dOn[pin-2] = val;
+        Serial.print("Updated pin: "); Serial.print(pin); Serial.print(". To state: "); Serial.println(val);
         pin = 0;
         val = 0;
       }
@@ -59,6 +60,10 @@ void InputManagerLED() {
     //Allocate the pin
     else if (!pin) {
       pin = Serial.read() -48;
+      if (pin == 9) {
+        TEST_OUTPUT_DISPLAY_ARRAY();
+        pin = 0;
+      }
       if (pin == 1) {
         Display();
         pin = 0;
@@ -68,4 +73,164 @@ void InputManagerLED() {
       }
     }
   }
+}
+
+void TEST_CycleTestsOnStartUp() {
+    TEST_Display_ZERO_TEST();
+    delay(1000);
+    TEST_Display_ONE_TEST();
+    delay(1000);
+    TEST_Display_TWO_TEST();
+    delay(1000);
+    TEST_Display_THREE_TEST();
+    delay(1000);
+    TEST_Display_FOUR_TEST();
+    delay(1000);
+    TEST_Display_FIVE_TEST();
+    delay(1000);
+    TEST_Display_SIX_TEST();
+    delay(1000);
+    TEST_Display_SEVEN_TEST();
+    delay(1000);
+    TEST_Display_EIGHT_TEST();
+    delay(1000);
+    TEST_Display_NINE_TEST();
+    delay(1000);
+}
+
+void TEST_OUTPUT_DISPLAY_ARRAY() {
+    Serial.print("2 is ");
+    Serial.println(dOn[0]);
+    Serial.print("3 is ");
+    Serial.println(dOn[1]);
+    Serial.print("4 is ");
+    Serial.println(dOn[2]);
+    Serial.print("5 is ");
+    Serial.println(dOn[3]);
+    Serial.print("6 is ");
+    Serial.println(dOn[4]);
+    Serial.print("7 is ");
+    Serial.println(dOn[5]);
+    Serial.print("8 is ");
+    Serial.println(dOn[6]);
+}
+
+void TEST_Display_ZERO_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 0;
+    dOn[4] = 0;
+    dOn[5] = 0;
+    dOn[6] = 1;
+    Serial.println("Testing the number ZERO : 0");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_ONE_TEST() {
+    dOn[0] = 1;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 1;
+    dOn[4] = 1;
+    dOn[5] = 1;
+    dOn[6] = 1;
+    Serial.println("Testing the number ONE : 1");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_TWO_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 1;
+    dOn[3] = 0;
+    dOn[4] = 0;
+    dOn[5] = 1;
+    dOn[6] = 0;
+    Serial.println("Testing the number TWO : 2");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_THREE_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 0;
+    dOn[4] = 1;
+    dOn[5] = 1;
+    dOn[6] = 0;
+    Serial.println("Testing the number THREE : 3");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_FOUR_TEST() {
+    dOn[0] = 1;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 1;
+    dOn[4] = 1;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Testing the number FOUR : 4");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_FIVE_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 1;
+    dOn[2] = 0;
+    dOn[3] = 0;
+    dOn[4] = 1;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Testing the number FIVE : 5");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_SIX_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 1;
+    dOn[2] = 0;
+    dOn[3] = 0;
+    dOn[4] = 0;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Testing the number SIX : 6");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_SEVEN_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 1;
+    dOn[4] = 1;
+    dOn[5] = 1;
+    dOn[6] = 1;
+    Serial.println("Testing the number SEVEN : 7");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_EIGHT_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 0;
+    dOn[4] = 0;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Testing the number EIGHT : 8");
+    TEST_OUTPUT_DISPLAY_ARRAY();
+}
+
+void TEST_Display_NINE_TEST() {
+    dOn[0] = 0;
+    dOn[1] = 0;
+    dOn[2] = 0;
+    dOn[3] = 1;
+    dOn[4] = 1;
+    dOn[5] = 0;
+    dOn[6] = 0;
+    Serial.println("Testing the number NINE : 9");
+    TEST_OUTPUT_DISPLAY_ARRAY();
 }
