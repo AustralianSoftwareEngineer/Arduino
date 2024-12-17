@@ -8,8 +8,7 @@ void setup() {
   Time = millis();
 
   SegmentStartUp();
-  TEST_7SEGMENT_LED_TEST(); //Used for testing 7 segment array.
-  // put your setup code here, to run once:
+  TEST_7SEGMENT_LED_TEST();
 }
 
 void loop() {
@@ -19,21 +18,14 @@ void loop() {
   InputManager();
 }
 
-/*void Display() {
-  for (int i = 0; i < 7; i++)
-  {
-    digitalWrite(i+2, LedDisplayArray[i]);
-  }
-}*/
 
-void Display(int inputAr[7]) {
-  for (int i = 0; i < 7; i++)
-  {
-    digitalWrite(i+2, inputAr[i]);
-  }
-}
-
+// Temperature Logging
 void TemperatureLogger() {
+  if ((analogRead(A0) * 0.488) > 28.0 && logTemperature) {
+    if ((millis() - Time) > 1000) {
+      Display_H();
+    }
+  }
   if ((millis() - Time) > 1000) {
     Serial.print("Temperature: ");
     Serial.println((analogRead(A0) * 0.488));
@@ -42,7 +34,6 @@ void TemperatureLogger() {
 }
 
 // Input Handling
-
 void InputManager() {
     if (Serial.available() > 0) {
         switch (Serial.read()) {
@@ -104,28 +95,38 @@ void InputManager() {
     }
 }
 
+void Display(int inputAr[7]) {
+  for (int i = 0; i < 7; i++)
+  {
+    digitalWrite(i+2, inputAr[i]);
+  }
+}
+
 void ChangeLEDState(int pin, int state) {
     digitalWrite(pin, state);
 }
 
 
 // Character Commands
-
 void Display_A() {
   int arr[7] = {0,0,0,1,0,0,0};
   Display(arr);
   Serial.println("Displaying the Letter A.");
 }
 
-void Display_Off()
-{
+void Display_H() {
+  int arr[7] = {1,0,0,1,0,0,0};
+  Display(arr);
+  Serial.println("Displaying the Letter H.");
+}
+
+void Display_Off() {
   int test_all_off[7] = {1,1,1,1,1,1,1};
   Display(test_all_off);
 }
 
 
 // Initialisation
-
 void SegmentStartUp() {
   for (int i = 0; i<7; i++)
   {
@@ -134,7 +135,6 @@ void SegmentStartUp() {
 }
 
 // TESTS
-
 const unsigned int DelayAmount = 500;
 
 void TEST_7SEGMENT_LED_TEST() {
@@ -162,27 +162,6 @@ void TEST_7SEGMENT_LED_TEST() {
     delay(DelayAmount);
     TEST_ALL_OFF_TEST();
 }
-
-/* Never used test function as favoured for memcpy instead.
-void TEST_FOR_LOOP_TEST()
-{
-  int test_ZERO[7] = {0,0,0,0,0,0,1};
-  for (int i = 0; i<7; i++)
-  {
-    LedDisplayArray[i] = test_ZERO[i];
-
-  }
-}
-*/
-
-/* Was replaced due to simplicity of passing an array in and copying on function.
-void TEST_Display_ZERO_TEST() {
-  int test_ZERO[7] = {0,0,0,0,0,0,1};
-  memcpy(LedDisplayArray, test_ZERO, sizeof(LedDisplayArray));
-  Serial.println("Testing the number ZERO : 0");
-  TEST_OUTPUT_DISPLAY_ARRAY();
-}
-*/
 
 void TEST_Display_ZERO_TEST() {
   int test_ZERO[7] = {0,0,0,0,0,0,1};
