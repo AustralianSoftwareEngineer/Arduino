@@ -69,7 +69,7 @@ void InputManager() {
                 selectedLedPin = 8;
                 break;
             case 57:
-                selectedLedPin = 9;
+                TEST_OUTPUT_DISPLAY_ARRAY();
                 break;
             case 65:
                 Display_A();
@@ -95,5 +95,6 @@ void InputManager() {
             default:
                 break;
         }
+        Display();
     }
 }
