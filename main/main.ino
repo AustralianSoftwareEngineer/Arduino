@@ -1,11 +1,16 @@
-unsigned long Time = 0;
+unsigned long deltaTime = 0;
+unsigned long fixedTime = 0;
 int pinState = 0;
-
 bool logTemperature = false;
+bool ledSpinActive = false;
+bool ledSpinReverseActive = false;
+unsigned int ledSpinLocPrevious = 0;
+unsigned int frameCount = 0;
 
 void setup() {
   Serial.begin(9600);
-  Time = millis();
+  deltaTime = millis();
+  fixedTime = millis();
 
   SegmentStartUp();
   TEST_7SEGMENT_LED_TEST();
@@ -16,20 +21,39 @@ void loop() {
     TemperatureLogger();
   }
   InputManager();
+  if (millis() - fixedTime >= 16)
+  {
+    FixedLoop();
+    fixedTime = millis();
+    frameCount++;
+    if (frameCount > 60) {
+      frameCount = 0;
+    }
+  }
 }
 
+void FixedLoop() {
+  if (ledSpinActive && frameCount % 5 == 0)
+  {
+    LED_Spin();
+  }
+  else if (ledSpinReverseActive && frameCount % 5 == 0)
+  {
+    LED_Spin_Reverse();
+  }
+}
 
 // Temperature Logging
 void TemperatureLogger() {
   if ((analogRead(A0) * 0.488) > 28.0 && logTemperature) {
-    if ((millis() - Time) > 1000) {
+    if ((millis() - deltaTime) > 1000) {
       Display_H();
     }
   }
-  if ((millis() - Time) > 1000) {
+  if ((millis() - deltaTime) > 1000) {
     Serial.print("Temperature: ");
     Serial.println((analogRead(A0) * 0.488));
-    Time = millis();
+    deltaTime = millis();
   }
 }
 
@@ -74,6 +98,14 @@ void InputManager() {
             case 68:
                 Display_Off();
                 break;
+            case 83:
+                ledSpinReverseActive = false;
+                ledSpinActive = !ledSpinActive;
+                break;
+            case 115:
+                ledSpinActive = false;
+                ledSpinReverseActive = !ledSpinReverseActive;
+                break;
             case 84:
                 logTemperature = !logTemperature;
                 break;
@@ -106,7 +138,6 @@ void ChangeLEDState(int pin, int state) {
     digitalWrite(pin, state);
 }
 
-
 // Character Commands
 void Display_A() {
   int arr[7] = {0,0,0,1,0,0,0};
@@ -132,6 +163,26 @@ void SegmentStartUp() {
   {
     pinMode((i+2), OUTPUT);
   }
+}
+
+void LED_Spin() {
+  int ledSpinArr[7] = {1,1,1,1,1,1,1};
+  if (ledSpinLocPrevious > 6 ) {
+    ledSpinLocPrevious = 0;
+  }
+  ledSpinArr[ledSpinLocPrevious] = 0;
+  ledSpinLocPrevious++;
+  Display(ledSpinArr);
+}
+
+void LED_Spin_Reverse() {
+  unsigned int ledSpinArr[7] = {1,1,1,1,1,1,1};
+  if (ledSpinLocPrevious > 6 ) {
+    ledSpinLocPrevious = 6;
+  }
+  ledSpinArr[ledSpinLocPrevious] = 0;
+  ledSpinLocPrevious--;
+  Display(ledSpinArr);
 }
 
 // TESTS
