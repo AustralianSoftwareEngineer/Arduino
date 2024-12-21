@@ -33,12 +33,10 @@ void loop() {
 }
 
 void FixedLoop() {
-  if (ledSpinActive && frameCount % 5 == 0)
-  {
+  if (ledSpinActive && frameCount % 5 == 0) {
     LED_Spin();
   }
-  else if (ledSpinReverseActive && frameCount % 5 == 0)
-  {
+  else if (ledSpinReverseActive && frameCount % 5 == 0) {
     LED_Spin_Reverse();
   }
 }
@@ -156,15 +154,6 @@ void Display_Off() {
   Display(test_all_off);
 }
 
-
-// Initialisation
-void SegmentStartUp() {
-  for (int i = 0; i<7; i++)
-  {
-    pinMode((i+2), OUTPUT);
-  }
-}
-
 void LED_Spin() {
   int ledSpinArr[7] = {1,1,1,1,1,1,1};
   if (ledSpinLocPrevious > 6 ) {
@@ -184,6 +173,18 @@ void LED_Spin_Reverse() {
   ledSpinLocPrevious--;
   Display(ledSpinArr);
 }
+
+
+// Initialisation
+void SegmentStartUp() {
+  for (int i = 0; i<7; i++)
+  {
+    pinMode((i+2), OUTPUT);
+  }
+}
+
+
+
 
 // TESTS
 const unsigned int DelayAmount = 500;
@@ -208,6 +209,10 @@ void TEST_7SEGMENT_LED_TEST() {
     TEST_Display_EIGHT_TEST();
     delay(DelayAmount);
     TEST_Display_NINE_TEST();
+    delay(DelayAmount);
+    TEST_SPIN_TEST();
+    delay(DelayAmount);
+    TEST_SPIN_REVERSE_TEST();
     delay(DelayAmount);
     TEST_ALL_ON_TEST();
     delay(DelayAmount);
@@ -272,6 +277,22 @@ void TEST_Display_NINE_TEST() {
   int test_NINE[7] = {0,0,0,1,1,0,0};
   Display(test_NINE);
   Serial.println("Testing the number NINE : 9");
+}
+
+void TEST_SPIN_TEST() {
+  Serial.println("Testing the LED Spinning function with 7 Loops at 12FPS.");
+  for (int i = 0; i < 28; i++) { 
+    LED_Spin();
+    delay(100);
+  }
+}
+
+void TEST_SPIN_REVERSE_TEST() {
+  Serial.println("Testing the LED Spinning reverse function with 7 Loops at 12FPS.");
+  for (int i = 0; i < 28; i++) { 
+    LED_Spin_Reverse();
+    delay(100);
+  }
 }
 
 void TEST_ALL_ON_TEST() {
