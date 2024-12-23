@@ -1,0 +1,89 @@
+[33mcommit 01d442384763e48cb0ae637e1400939fafbbf1fc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Mon Dec 23 14:10:12 2024 +1100
+
+    Splitting functionality into multiple files for easier project management.
+
+[33mcommit 5321f79717e11e96e5d7b5cb95595ba7a7856ddc[m[33m ([m[1;32mfile_split[m[33m)[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Sat Dec 21 17:57:54 2024 +1100
+
+    Added test cases for spinning LED.
+
+[33mcommit e7734f98ac9697ffc541c0065b68e3db8b160371[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Sat Dec 21 17:46:11 2024 +1100
+
+    Added fixed time loop and LED loop functions.
+
+[33mcommit 12d169a6c64157a265de933194420af94ca8c03b[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Wed Dec 18 02:31:30 2024 +1100
+
+    Removed commented out code, added functionality to temperature readout. Added display of letter H.
+
+[33mcommit d1b59be446d9e824d24838a855c9e9daba3374fc[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Wed Dec 18 02:23:52 2024 +1100
+
+    Improved readability and reorganised function calls. Improved input handler and fixed single led functionality.
+
+[33mcommit 82774cabdb173d371ef5dda5f2a696ececb592c2[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 06:07:12 2024 +1100
+
+    Improved readme and added more images.
+
+[33mcommit 17dccb7367cf5b193b321e8c9ce5681cb63bd83f[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:52:59 2024 +1100
+
+    Adding reference images and readme.
+
+[33mcommit 36d8d5664fde2f7d333ab1b2bab9bfede26c7977[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:45:45 2024 +1100
+
+    Splitting core components into different files.
+
+[33mcommit 206274e727f704138df89fd435de558552de9d8e[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:44:21 2024 +1100
+
+    Significantly improved input handler and readability.
+
+[33mcommit 41872af4b0c3e24f9a3e28c7d6971b36fa3b3021[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:43:10 2024 +1100
+
+    Testing is working, crisply now.
+
+[33mcommit b3d6ad646f341608b4b9d06080f114bc1558e58c[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:39:59 2024 +1100
+
+    Not really working, but showing working process.
+
+[33mcommit c850a020e8b34342c76f69d2d911476a7c5704ee[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:36:45 2024 +1100
+
+    Added functionality of 7 segment display.
+
+[33mcommit c6430f8ae72024cb24c925ff9e5bbb5c5a46d778[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:34:42 2024 +1100
+
+    Introduced oop ideology.
+
+[33mcommit d8cb3e4bca07201ed2f5927fc8d0ea92a0664707[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:33:19 2024 +1100
+
+    Slowed down the spam. Fixed temperature conversion.
+
+[33mcommit 9c5151bf61bf3d255f313820d776896890a0cc4c[m
+Author: R. Fitzgerald <AustralianSoftwareEngineer@gmail.com>
+Date:   Tue Dec 17 05:31:06 2024 +1100
+
+    Basic temperature reading.

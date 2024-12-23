@@ -9,7 +9,9 @@ extern bool ledSpinActive;
 extern bool ledSpinReverseActive;
 extern bool ledElevateActive;
 extern bool ledDescendActive;
+extern bool testsRunning;
 extern unsigned int ledLocationLit;
 extern unsigned int frameCount;
+
 
 #endif
