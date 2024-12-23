@@ -1,11 +1,5 @@
 #include "unit_test.h"
 
-#ifndef UNIT_TESTS_CPP
-#define UNIT_TEST_CPP
-#include "namespaces.h"
-
-const unsigned int DelayAmount = 500;
-
 void TEST_7SEGMENT_LED_TEST() {
     TEST_Display_ZERO_TEST();
     delay(DelayAmount);
@@ -123,4 +117,3 @@ void TEST_ALL_OFF_TEST() {
   Display(test_all_off);
   Serial.println("Testing the array being turned OFF.");
 }
-#endif

@@ -1,5 +1,4 @@
-#ifndef INPUT_HANDLER_CPP
-#define INPUT_HANDLER_CPP
+#include "input_handler.h"
 
 void InputManager() {
     if (Serial.available() > 0) {
@@ -86,5 +85,3 @@ void ClearStates() {
   ledElevateActive = false;
   ledDescendActive = false;
 }
-
-#define INPUT_HANDLER_CPP

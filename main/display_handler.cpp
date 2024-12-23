@@ -1,5 +1,4 @@
-
-
+#include "display_handler.h"
 
 void Display(int inputAr[7]) {
   for (int i = 0; i < 7; i++)

@@ -1,6 +1,4 @@
-#ifndef TEMPERATURE_HANDLER_CPP
-#define TEMPERATURE_HANDLER_CPP
-#include "namespaces.h"
+#include "temperature_handler.h"
 
 void TemperatureLogger() {
   if ((analogRead(A0) * 0.488) > 24.0 && logTemperature) {
@@ -14,5 +12,3 @@ void TemperatureLogger() {
     deltaTime = millis();
   }
 }
-
-#endif
