@@ -1,8 +1,4 @@
-#include "display_functions.h"
-#include "display_handler.h"
-#include "input_handler.h"
-#include "temperature_handler.h"
-#include "unit_test.h"
+#include "main.h"
 
 unsigned long deltaTime = 0;
 unsigned long fixedTime = 0;
@@ -21,7 +17,9 @@ void setup() {
   fixedTime = millis();
 
   SegmentStartUp();
+  #ifdef UNIT_TEST_H
   TEST_7SEGMENT_LED_TEST();
+  #endif
 }
 
 void SegmentStartUp() {
@@ -32,9 +30,11 @@ void SegmentStartUp() {
 }
 
 void loop() {
+  #ifdef TEMPERATURE_HANDLER_H
   if (logTemperature) {
     TemperatureLogger();
   }
+  #endif
   InputManager();
   if (millis() - fixedTime >= 16)
   {
