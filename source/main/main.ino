@@ -8,6 +8,10 @@ bool ledSpinActive = false;
 bool ledSpinReverseActive = false;
 bool ledElevateActive = false;
 bool ledDescendActive = false;
+bool ledFadeOnActive = true;
+bool ledFadeOffActive = true;
+bool ledPongActive = true;
+bool testsRunning = false;
 unsigned int ledLocationLit = 0;
 unsigned int frameCount = 0;
 unsigned int fadedAmount = 0;
@@ -49,6 +53,11 @@ void loop() {
       frameCount = 0;
     }
   }
+  if (analogRead(A1) == 1023 && !testsRunning) { {
+      Serial.println(analogRead(A1)); //Current left in for debugging on analog input.
+      TEST_7SEGMENT_LED_TEST();
+    }
+  }
 }
 
 //Scaled to a fixed framerate
@@ -65,9 +74,16 @@ void FixedLoop() {
   else if (ledDescendActive && frameCount % 10 == 0) {
     //LED_Descend();
   }
-
-    if (Serial.println(analogRead(A2) != 119 && Serial.println(analogRead(A2)) != 118)) {
-      Serial.println(analogRead(A2));
-    }
-  
+  if (Serial.println(analogRead(A2) != 119 && Serial.println(analogRead(A2)) != 118)) {
+    Serial.println(analogRead(A2));
+  }
+  if (ledFadeOnActive && frameCount % 5 == 0) {
+    ledFadeOn(9);
+  }
+  if (ledFadeOffActive && frameCount % 5 == 0) {
+    ledFadeOff(10);
+  }
+  if (ledPongActive && frameCount % 5 == 0) {
+    ledFadePingPong(11);
+  }
 }
