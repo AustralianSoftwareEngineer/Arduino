@@ -69,9 +69,11 @@ void InputManager() {
                 ClearStates();
                 ledSpinActive = true;
                 break;
+            #ifdef TEMPERATURE_HANDLER_H
             case 116:
                 TemperatureLogger();
                 break;
+            #endif
             default:
                 break;
         }

@@ -1,5 +1,7 @@
 #include "unit_test.h"
 
+const unsigned int DelayAmount = 500;
+
 void TEST_7SEGMENT_LED_TEST() {
   if (!testsRunning) {
     testsRunning = true;

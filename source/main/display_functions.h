@@ -2,7 +2,6 @@
 #define DISPLAY_FUNCTIONS_H
 #include <Arduino.h>
 #include "main.h"
-#include "display_handler.h"
 
 void Display_A();
 void Display_H();
