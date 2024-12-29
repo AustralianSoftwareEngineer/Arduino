@@ -3,6 +3,7 @@
 #include "input_handler.h"
 #include "temperature_handler.h"
 #include "unit_test.h"
+#include "led_functions.h"
 
 unsigned long deltaTime = 0;
 unsigned long fixedTime = 0;
@@ -12,6 +13,9 @@ bool ledSpinActive = false;
 bool ledSpinReverseActive = false;
 bool ledElevateActive = false;
 bool ledDescendActive = false;
+bool ledFadeOnActive = true;
+bool ledFadeOffActive = true;
+bool ledPongActive = true;
 bool testsRunning = false;
 unsigned int ledLocationLit = 0;
 unsigned int frameCount = 0;
@@ -37,8 +41,7 @@ void loop() {
   if (logTemperature) {
     TemperatureLogger();
   }
-  if (millis() - fixedTime >= 16)
-  {
+  if (millis() - fixedTime >= 16) {
     FixedLoop();
     fixedTime = millis();
     frameCount++;
@@ -46,8 +49,7 @@ void loop() {
       frameCount = 0;
     }
   }
-  if (analogRead(A1) == 1023 && !testsRunning) {
-    {
+  if (analogRead(A1) == 1023 && !testsRunning) { {
       Serial.println(analogRead(A1)); //Current left in for debugging on analog input.
       TEST_7SEGMENT_LED_TEST();
     }
@@ -67,5 +69,14 @@ void FixedLoop() {
   }
   else if (ledDescendActive && frameCount % 10 == 0) {
     //LED_Descend();
+  }
+  if (ledFadeOnActive && frameCount % 5 == 0) {
+    ledFadeOn(9);
+  }
+  if (ledFadeOffActive && frameCount % 5 == 0) {
+    ledFadeOff(10);
+  }
+  if (ledPongActive && frameCount % 5 == 0) {
+    ledFadePingPong(11);
   }
 }
