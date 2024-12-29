@@ -1,8 +1,4 @@
-#include "display_functions.h"
-#include "display_handler.h"
-#include "input_handler.h"
-#include "temperature_handler.h"
-#include "unit_test.h"
+#include "main.h"
 
 unsigned long deltaTime = 0;
 unsigned long fixedTime = 0;
@@ -12,9 +8,9 @@ bool ledSpinActive = false;
 bool ledSpinReverseActive = false;
 bool ledElevateActive = false;
 bool ledDescendActive = false;
-bool testsRunning = false;
 unsigned int ledLocationLit = 0;
 unsigned int frameCount = 0;
+unsigned int fadedAmount = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -22,21 +18,28 @@ void setup() {
   fixedTime = millis();
 
   SegmentStartUp();
+  #ifdef UNIT_TEST_H
   TEST_7SEGMENT_LED_TEST();
+  #endif
 }
 
 void SegmentStartUp() {
-  for (int i = 0; i<7; i++)
+  for (int i = 2; i<12; i++)
   {
-    pinMode((i+2), OUTPUT);
+    pinMode((i), OUTPUT);
   }
+  digitalWrite(9, 1);
+  digitalWrite(10, 0);
+  digitalWrite(11, 1);
 }
 
 void loop() {
-  InputManager();
+  #ifdef TEMPERATURE_HANDLER_H
   if (logTemperature) {
     TemperatureLogger();
   }
+  #endif
+  InputManager();
   if (millis() - fixedTime >= 16)
   {
     FixedLoop();
@@ -44,12 +47,6 @@ void loop() {
     frameCount++;
     if (frameCount > 60) {
       frameCount = 0;
-    }
-  }
-  if (analogRead(A1) == 1023 && !testsRunning) {
-    {
-      Serial.println(analogRead(A1)); //Current left in for debugging on analog input.
-      TEST_7SEGMENT_LED_TEST();
     }
   }
 }
