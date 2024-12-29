@@ -13,17 +13,12 @@ extern bool testsRunning;
 extern unsigned int ledLocationLit;
 extern unsigned int frameCount;
 
-<<<<<<< HEAD:source/main/main.h
 
-=======
-<<<<<<< Updated upstream
-=======
 #include "display_functions.h"
 #include "display_handler.h"
 #include "input_handler.h"
 #include "temperature_handler.h"
 #include "unit_test.h"
+#include "led_functions.h"
 
->>>>>>> Stashed changes
->>>>>>> file_split:main/main.h
 #endif
