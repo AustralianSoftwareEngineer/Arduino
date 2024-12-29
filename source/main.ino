@@ -12,6 +12,7 @@ bool ledSpinActive = false;
 bool ledSpinReverseActive = false;
 bool ledElevateActive = false;
 bool ledDescendActive = false;
+bool testsRunning = false;
 unsigned int ledLocationLit = 0;
 unsigned int frameCount = 0;
 
@@ -32,10 +33,10 @@ void SegmentStartUp() {
 }
 
 void loop() {
+  InputManager();
   if (logTemperature) {
     TemperatureLogger();
   }
-  InputManager();
   if (millis() - fixedTime >= 16)
   {
     FixedLoop();
@@ -43,6 +44,12 @@ void loop() {
     frameCount++;
     if (frameCount > 60) {
       frameCount = 0;
+    }
+  }
+  if (analogRead(A1) == 1023 && !testsRunning) {
+    {
+      Serial.println(analogRead(A1)); //Current left in for debugging on analog input.
+      TEST_7SEGMENT_LED_TEST();
     }
   }
 }

@@ -1,6 +1,8 @@
 #include "unit_test.h"
 
 void TEST_7SEGMENT_LED_TEST() {
+  if (!testsRunning) {
+    testsRunning = true;
     TEST_Display_ZERO_TEST();
     delay(DelayAmount);
     TEST_Display_ONE_TEST();
@@ -28,6 +30,8 @@ void TEST_7SEGMENT_LED_TEST() {
     TEST_ALL_ON_TEST();
     delay(DelayAmount);
     TEST_ALL_OFF_TEST();
+    testsRunning = false;
+  }
 }
 
 void TEST_Display_ZERO_TEST() {
