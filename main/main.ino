@@ -15,6 +15,7 @@ bool ledDescendActive = false;
 bool testsRunning = false;
 unsigned int ledLocationLit = 0;
 unsigned int frameCount = 0;
+unsigned int fadedAmount = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -26,9 +27,9 @@ void setup() {
 }
 
 void SegmentStartUp() {
-  for (int i = 0; i<7; i++)
+  for (int i = 2; i<10; i++)
   {
-    pinMode((i+2), OUTPUT);
+    pinMode((i), OUTPUT);
   }
 }
 
