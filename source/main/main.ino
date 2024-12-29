@@ -65,4 +65,9 @@ void FixedLoop() {
   else if (ledDescendActive && frameCount % 10 == 0) {
     //LED_Descend();
   }
+
+    if (Serial.println(analogRead(A2) != 119 && Serial.println(analogRead(A2)) != 118)) {
+      Serial.println(analogRead(A2));
+    }
+  
 }
